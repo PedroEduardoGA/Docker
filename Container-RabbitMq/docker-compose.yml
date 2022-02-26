@@ -1,0 +1,16 @@
+#Define serviços
+services:
+    rabbitmq:
+      image: rabbitmq:3-management            #Imagem que sera usada no container
+      container_name: rabbitmq                #Nome que sera dado ao container
+      restart: always                         #Define que o container sera iniciado assim que a maquina for ligada
+      ports:                                  #Define portas
+        - 5672:5672
+        - 15672:15672
+    
+      volumes: 
+        - ./Dados:/var/lib/rabbitmq/          #Copiara para a pasta "Dados" no diretorio atual todo o conteudo registrado na pasta "var/lib/rabbitmq"
+    
+      environment:                            #Define os parâmetros de usuario para acesso do painel do rabbitmq na porta 5672...
+        - RABBITMQ_DEFAULT_USER=username
+        - RABBITMQ_DEFAULT_PASS=userpass

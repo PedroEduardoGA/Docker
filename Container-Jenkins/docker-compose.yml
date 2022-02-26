@@ -1,0 +1,15 @@
+#Seleciona a versão do docker-compose
+version: '3'
+
+#Define serviços
+services:
+    jenkins:
+        container_name: jenkins                             #Nome que sera dado ao container
+        image: jenkins-docker:latest                        #Imagem que sera usada no container
+        ports:                                              #Definição de portas, para acessar no seu sistema por padrão será usado a 8097
+            - "8097:8080"
+            - "50000:50000"
+        volumes:
+            - ./docker/jenkins/:/var/jenkins_home           #Cria uma pasta na pasta chamada "docker" e pega os conteudos da pasta "var/jenkins/home"
+            - /var/run/docker.sock:/var/run/docker.sock     #Copia conteudos das pastas
+            - /usr/bin/docker:/usr/bin/docker
