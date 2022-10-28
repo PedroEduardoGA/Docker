@@ -1,0 +1,29 @@
+version: '3'
+services:
+  database:
+    image: postgres
+    container_name: postgesContainer
+    ports: 
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: banco-post
+    volumes:
+    - /DockerVolumes/Postgres:/var/lib/postgresql/11/main
+    networks: 
+      - postgres-network
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: email@email.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 80:80
+    depends_on:
+      - database
+    networks:
+      - postgres-network
+networks:
+  postgres-network:
+    driver: bridge
